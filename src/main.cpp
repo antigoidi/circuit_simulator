@@ -1,7 +1,21 @@
+#include "matrix/matrix.h"
+#include "parser/parser.h"
+#include <fstream>
 #include <iostream>
-#include "parser/adder.h"
-int main() {
+#include <string>
+int main(int argc, char **argv) {
   std::cout << "Hi, this is a circuit simulator\n";
-  std::cout << "75.23 + 43.19 = " << add(75.23f, 43.19f) << std::endl;
+  if (argc != 2) {
+    std::cout << "usage: ./circuit_simulator <file>\n";
+    return 0;
+  }
+  std::ifstream MyReadFile(argv[1]);
+  Parser parser;
+  if (parser.readFile(MyReadFile)) {
+    // do something
+    std::cout << parser;
+    Matrix matrix(parser);
+    std::cout << matrix;
+  }
   return 0;
 }
