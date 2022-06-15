@@ -54,13 +54,21 @@ Matrix::Matrix(const Parser &parser) {
 
   A_.clear();
   b_.clear();
+  Eigen::MatrixXd A1(size_, size_);
+  Eigen::VectorXd b1(size_);
   for (int i = 1; i < sz; i++) {
     std::vector<double> temp;
     for (int j = 1; j < sz; j++) {
       temp.push_back(A[i][j]);
+      A1(i - 1, j - 1) = A[i][j];
     }
     A_.push_back(temp);
     b_.push_back(b[i]);
+    b1(i - 1) = b[i];
+  }
+  Eigen::VectorXd x = A1.lu().solve(b1);
+  for (auto num : x) {
+    res_.push_back(num);
   }
 }
 
@@ -123,7 +131,15 @@ std::ostream &operator<<(std::ostream &os, Matrix &mat) {
     os << " | ";
     os << mat.x_[i];
     os << " | ";
+    os << mat.res_[i];
+    os << " | ";
     os << mat.b_[i] << "\n";
+  }
+  os << "Answer: \n";
+  for (int i = 0; i < mat.size_; i++) {
+    os << mat.x_[i];
+    os << " = ";
+    os << mat.res_[i] << "\n";
   }
   return os;
 }

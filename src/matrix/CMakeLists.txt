@@ -15,4 +15,5 @@ target_include_directories(matrix
 target_link_libraries(matrix
   PRIVATE
     parser
+    Eigen3::Eigen
   )

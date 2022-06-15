@@ -1,5 +1,6 @@
 #include "matrix/matrix.h"
 #include "parser/parser.h"
+#include <Eigen/Dense>
 #include <fstream>
 #include <iostream>
 #include <string>

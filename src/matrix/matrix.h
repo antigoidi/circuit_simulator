@@ -1,11 +1,11 @@
 #ifndef MATRIX_H_
 #define MATRIX_H_
 #include "../parser/parser.h"
+#include <Eigen/Dense>
 #include <iostream>
 #include <string>
 #include <utility>
 #include <vector>
-
 class Matrix {
 public:
   Matrix() = default;
@@ -36,6 +36,7 @@ private:
   std::vector<std::vector<double>> A_;
   std::vector<double> b_;
   std::vector<std::string> x_;
+  std::vector<double> res_;
   int size_;
 };
 #endif

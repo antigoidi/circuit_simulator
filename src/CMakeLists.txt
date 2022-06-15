@@ -7,4 +7,5 @@ target_link_libraries(circuit_simulator
   PRIVATE
     matrix
     parser
+    Eigen3::Eigen
   )
