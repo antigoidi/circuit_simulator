@@ -70,7 +70,7 @@ struct Edge {
   }
 };
 
-// only used for QN, QM, MN, MP
+// only used for QN, QP, MN, MP
 struct TEdge {
   unsigned int from_;
   unsigned int mid_;

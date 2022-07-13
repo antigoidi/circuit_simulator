@@ -25,6 +25,9 @@ public:
   void updateNodeCount1(Edge &edge);
   void updateNodeCount2(TEdge &tedge);
 
+  bool isLinear() const;
+  int getNLECount() const;
+
   friend std::ostream &operator<<(std::ostream &os, EdgeMap &edgemap);
   friend std::ostream &operator<<(std::ostream &os, TEdgeMap &tedgemap);
   friend std::ostream &operator<<(std::ostream &os, Parser &parser);
@@ -41,6 +44,8 @@ private:
   TEdgeMap MN_;
   TEdgeMap MP_;
   int node_count_;
+  int diode_count_ = 0;
+  int tri_count_ = 0;
   std::vector<std::pair<unsigned int, unsigned int>> current_edges_;
 };
 #endif

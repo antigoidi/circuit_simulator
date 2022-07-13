@@ -259,6 +259,7 @@ bool Parser::strParser(std::string &myText, Element &type, Edge &edge,
   if (type == QN || type == QP || type == MN || type == MP) {
     if (count >= 5) {
       updateNodeCount2(tedge);
+      ++tri_count_;
       return true;
     }
     return false;
@@ -268,6 +269,9 @@ bool Parser::strParser(std::string &myText, Element &type, Edge &edge,
       current_edges_.push_back(std::make_pair(edge.from_, edge.to_));
     }
     updateNodeCount1(edge);
+    if (edge.type_ == D) {
+      ++diode_count_;
+    }
     return true;
   }
   return false;
@@ -382,4 +386,18 @@ void Parser::updateNodeCount2(TEdge &tedge) {
   if (node_count_ < max) {
     node_count_ = max;
   }
+}
+
+bool Parser::isLinear() const {
+  if (!D_.empty() || !QN_.empty() || !QP_.empty() || !MN_.empty() ||
+      !MP_.empty()) {
+    return false;
+  }
+  return true;
+}
+
+int Parser::getNLECount() const {
+  std::cout << "diode_count is " << diode_count_ << "\n";
+  std::cout << "tri_count is " << tri_count_ << "\n";
+  return diode_count_ + 3 * tri_count_;
 }

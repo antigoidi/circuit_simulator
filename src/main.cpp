@@ -17,6 +17,16 @@ int main(int argc, char **argv) {
     std::cout << parser;
     Matrix matrix(parser);
     std::cout << matrix;
+    if (!matrix.isLinear()) {
+      matrix.dampMethod();
+      while (matrix.getNorm() > 1e-5) {
+        matrix.update();
+        // std::cout.precision(10);
+        matrix.dampMethod();
+        std::cout << matrix;
+      }
+      matrix.getSysEqns();
+    }
   }
   return 0;
 }
